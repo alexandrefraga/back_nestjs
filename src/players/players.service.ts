@@ -7,6 +7,7 @@ import { CreatePlayerDto } from './dtos/create-player.dto';
 import { Player } from './interfaces/player.interface';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { UpdatePlayerDto } from './dtos/update-player.dto';
 
 @Injectable()
 export class PlayersService {
@@ -28,7 +29,7 @@ export class PlayersService {
     }
   }
 
-  async updatePlayer(_id, data: CreatePlayerDto): Promise<void> {
+  async updatePlayer(_id, data: UpdatePlayerDto): Promise<void> {
     const existentPlayer = await this.playerModel.findOne({ _id }).exec();
     if (existentPlayer) {
       await this.update(_id, data);
@@ -58,16 +59,9 @@ export class PlayersService {
     return await newPlayer.save();
   }
 
-  private async update(_id, data: CreatePlayerDto): Promise<Player> {
+  private async update(_id, data: UpdatePlayerDto): Promise<Player> {
     return await this.playerModel
-      .findOneAndUpdate(
-        {
-          _id,
-        },
-        {
-          $set: data,
-        },
-      )
+      .findOneAndUpdate({ _id }, { $set: data })
       .exec();
   }
 }
