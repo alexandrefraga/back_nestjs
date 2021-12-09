@@ -12,7 +12,7 @@ import {
 import { CreatePlayerDto } from './dtos/create-player.dto';
 import { Player } from './interfaces/player.interface';
 import { PlayersService } from './players.service';
-import { MissingParamValidationPipe } from '../shared/pipes/missing-param-validation.pipes';
+import { MissingParamValidationPipe } from '../common/pipes/missing-param-validation.pipes';
 import { UpdatePlayerDto } from './dtos/update-player.dto';
 
 @Controller('api/players')
