@@ -50,6 +50,10 @@ export class PlayersService {
     return await this.playerModel.find().exec();
   }
 
+  async getSomePlayers(data: string[]): Promise<Player[]> {
+    return await this.playerModel.find({ _id: { $in: [...data] } });
+  }
+
   async deletePlayer(_id: string): Promise<any> {
     return await this.playerModel.deleteOne({ _id }).exec();
   }
